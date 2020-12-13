@@ -33,18 +33,30 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State var artworks = artData
-  
-  var body: some View {
-      List(artworks) { artwork in
-          Text(artwork.title)
-      }
-      .listStyle(PlainListStyle())
-  }
+    @State var artworks = artData
+    
+    var body: some View {
+        
+        NavigationView {
+            
+        List(artworks) { artwork in
+            NavigationLink(
+                destination: DetailView(artwork: artwork),
+                label: {
+                    Text(artwork.title)
+                })
+ 
+        }
+        .listStyle(PlainListStyle())
+        .navigationBarTitle("Artworks")
+            
+            DetailView(artwork: artworks[0])
+    }
+}
 }
 
 struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+    static var previews: some View {
+        ContentView()
+    }
 }
